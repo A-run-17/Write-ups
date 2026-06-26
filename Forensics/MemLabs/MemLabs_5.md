@@ -16,7 +16,7 @@ Also, he noticed his most loved application that he always used crashed every ti
 
 ---
 
-## Flag - 1
+## Flag 
 
 First let's see what are the process that was running using the pslist plugin.
 ```
@@ -37,4 +37,22 @@ We can see a suspicious file name is found : `SW1wb3J0YW50.rar`
 
 Now let's dump that into our system and see what's inside . There is a .png file which requires a password for opening.
 
-Let's dump the explorer
+In the archive we found a file named `ZmxhZ3shIV93M0xMX2QwbjNfU3Q0ZzMtMV8wZl9MNEJfNV9EMG4zXyEhfQ.bmp`. This look like a base64 encoded string.
+
+```
+$ echo "ZmxhZ3shIV93M0xMX2QwbjNfU3Q0ZzMtMV8wZl9MNEJfNV9EMG4zXyEhfQ" | base64 -d
+flag{!!_w3LL_d0n3_St4g3-1_0f_L4B_5_D0n3_!!}
+```
+
+This gives us the first flag. Using this as the password for the `.rar` file to open that PNG file , we got the second flag.
+```
+Flag 2 : flag{W1th_th1s_$taGe_2_1s_cOmPL3T3_!!}
+```
+
+There is one flag remaining. we found `NOTEPAD.EXE` an suspicious activity. Dump that file into our system and analyze it.
+
+I will load the file into IDA Pro for inspection. Once loaded, we noticed some strings. After putting them together, we will able to retrieve the flag
+
+```
+Flag 3 : bi0s{M3m_l4b5_OVeR_!}
+```
